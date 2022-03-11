@@ -1,13 +1,13 @@
 
 # Meta-analysis for GWAS 
 
-## 1. GWAS, https://github.com/freeseek/mocha/blob/master/wdl/assoc.wdl (applying regenie to MoChA output) is suggested to be used. 
+### 1. GWAS, https://github.com/freeseek/mocha/blob/master/wdl/assoc.wdl (applying regenie to MoChA output) is suggested to be used. 
 
-## 2. QC for imputation info (>0.6) and MAF (>0.001) for each cohort.
+### 2. QC for imputation info (>0.6) and MAF (>0.001) for each cohort.
 
-## 3. munge (liftover to 38 and harmonize with GnomAD).
+### 3. munge (liftover to 38 and harmonize with GnomAD).
 
-## 4. Meta-analysis 
+### 4. Meta-analysis 
    Regarding the GWAS outcome, all cohorts defined mLOX as binary outcome with MoChA, except for UKB. For UKB, two measures are used, one as binary (with MoChA), the other as continuous by combing 3 ways of mLOX calling.
    IVW for those used logsitic regression and weighted z-score for aggregating summary stats 
    Regarding the ancestry, Biobank Japan (BBJ) is the only cohort which is not from European ancestry.
