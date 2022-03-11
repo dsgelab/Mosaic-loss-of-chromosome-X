@@ -5,7 +5,7 @@
 
 2. QC for imputation info (>0.6) and MAF (>0.001) for each cohort.
 
-3. liftover to 38 build ()
+3. liftover to 38 build (https://github.com/FINNGEN/META_ANALYSIS/blob/master/wdl/lift.wdl)
 
 4. munge (harmonize with GnomAD).
    https://github.com/FINNGEN/META_ANALYSIS/blob/master/wdl/munge_wo_lift.wdl
