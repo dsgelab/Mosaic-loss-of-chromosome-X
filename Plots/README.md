@@ -1,19 +1,19 @@
 # Plots
 
-### Prevalence by age groups
+Fig 1A. Prevalence by age groups
 
 
-### Distribution by cell fractions
+Fig 1B. Distribution by cell fractions
 
 
-### Heritability by age groups
+Fig 1C. Heritability by age groups
 
 
-### Manhattan plots and QQ plot for GWAS meta-analysis and for each biobank
+Fig 2. Manhattan plots and QQ plot for GWAS meta-analysis and for each biobank
 
 
-### Manhattan plots and QQ plot for Allelic shift analysis meta-analysis and for each biobank
+Fig 3. Manhattan plots and QQ plot for Allelic shift analysis meta-analysis and for each biobank
 
 
-### Locus Zoom plot for independent loci identified from allelic shift analysis
+Fig 4. Locus Zoom plot for independent loci identified from allelic shift analysis
 
