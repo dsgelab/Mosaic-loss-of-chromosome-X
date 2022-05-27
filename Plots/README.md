@@ -1,4 +1,4 @@
-# Plots
+Plots
 
-## Prevalence by age groups
+### Prevalence by age groups
 
