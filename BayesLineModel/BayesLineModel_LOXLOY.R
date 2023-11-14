@@ -1,6 +1,7 @@
 
 line_dir <- "/Users/aoxliu/Documents/Project3_Finngen_mCA/Analysis_GWAS_LOX/Main_analysis/CompareLOXLOY_ShiftGWAS/CompareLOXLOY/Bayes_Line_Models/"
-source(paste0(line_dir, "codes_by_Matti/line_models_functions.R") )
+source(paste0(line_dir, "line_models_functions.R") )
+
 
 
 ######################################################################################################
