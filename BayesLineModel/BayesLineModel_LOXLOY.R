@@ -1,5 +1,13 @@
-dat <- read.table(paste0(line_dir, "data/20231024_sig_LOXmeta_LOYukbJohn.BayesLineModelInput.LDQCed.tsv"), header=T, sep="\t")
 
+line_dir <- "/Users/aoxliu/Documents/Project3_Finngen_mCA/Analysis_GWAS_LOX/Main_analysis/CompareLOXLOY_ShiftGWAS/CompareLOXLOY/Bayes_Line_Models/"
+source(paste0(line_dir, "codes_by_Matti/line_models_functions.R") )
+
+
+######################################################################################################
+#                                     Read in data                                                   #
+######################################################################################################
+
+dat <- read.table(paste0(line_dir, "data/20231024_sig_LOXmeta_LOYukbJohn.BayesLineModelInput.LDQCed.tsv"), header=T, sep="\t")
 
 
 
