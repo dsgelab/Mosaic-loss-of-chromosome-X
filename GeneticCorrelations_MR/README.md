@@ -1,6 +1,0 @@
-
-# Genetic correlations
-
-
-
-# MR
