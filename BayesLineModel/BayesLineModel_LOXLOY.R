@@ -39,7 +39,6 @@ dim(dat)   # 212  22
 freq_loy <- 41791/(205011)   # 0.2038476
 freq_lox <- 86093/(818431)   # 0.1051927
 
-
 taus=c(0.15, 0.15, 0.15)    # prior SD for the larger effect 
 slopes=c(0, Inf, 0.30)    # slopes for models
 rhos=c(0.995, 0.995, 0.995) # rhos for models
@@ -54,10 +53,8 @@ visualize.line.models(scales=taus, slopes=slopes, cors=rhos,
                       legend.position = "bottomright")
 #NOTE: set legend.position = NULL to remove legend.
 
-
 dat_line <- dat %>% filter(!is.na(eff_loy_bolt) & !is.na(eff_lox_ivw)) 
 dim(dat_line)   # 199  22
-
 
 #Assume that these two effects are from independent data sets:
 r.lkhood = 0 # 0 means no correlation between estimators of EFF1 and EFF2
@@ -140,20 +137,5 @@ dat_output <- dat_output %>%
 write.table(dat_output, "FormattedTables/TableS12_mLOX_mLOY_AssignGroups.BayesLineModel.LDQCed.slope030.tsv", append=F, quote=F, sep="\t", row.names=F, col.names=T)
 
 
-
 dat_res %>% group_by(grp_95.separate) %>% count()
-#   grp_95.separate             n
-# 1 mLOX specific              36 -> 34
-# 2 mLOY specific              24 -> 25
-# 3 shared by mLOX and mLOY    23 -> 21
-# 4 NA                        113 -> 119
-
-
-dat_res %>% group_by(grp_95.joint) %>% count()
-#   grp_95.joint                n
-# 1 mLOX specific              36 -> 31
-# 2 mLOY specific              28 -> 35
-# 3 shared by mLOX and mLOY    19 -> 19
-# 4 NA                        113 -> 114
-
 
