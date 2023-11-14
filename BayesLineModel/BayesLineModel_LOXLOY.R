@@ -1,7 +1,15 @@
 
+library(dplyr)
+library(tidyr)
+library(data.table)
+library(ggrepel)
+library(ggplot2)
+library(plotly)
+'%!in%' <- function(x,y)!('%in%'(x,y))
+
+
 line_dir <- "/Users/aoxliu/Documents/Project3_Finngen_mCA/Analysis_GWAS_LOX/Main_analysis/CompareLOXLOY_ShiftGWAS/CompareLOXLOY/Bayes_Line_Models/"
 source(paste0(line_dir, "line_models_functions.R") )
-
 
 
 
@@ -10,7 +18,7 @@ source(paste0(line_dir, "line_models_functions.R") )
 ######################################################################################################
 
 dat <- read.table(paste0(line_dir, "data/20231024_sig_LOXmeta_LOYukbJohn.BayesLineModelInput.LDQCed.tsv"), header=T, sep="\t")
-
+dim(dat)   # 212  22
 
 
 
@@ -28,50 +36,12 @@ dat <- read.table(paste0(line_dir, "data/20231024_sig_LOXmeta_LOYukbJohn.BayesLi
 # This is reasonable prior in typical GWAS but if you have larger effects, 
 # adjust tau accordingly.
 
-
-## the slope when effects are shared?
-lm_fit <- lm(eff_lox_ivw ~ eff_loy_bolt, data=dat %>% filter(trait=="mLOX and mLOY (same variant)"))
-summary(lm_fit)
-# old
-# (Intercept)  0.007261   0.001297   5.596  0.00139 ** 
-# eff_loy_bolt 0.254346   0.004304  59.096 1.58e-09 ***
-# new 
-#               Estimate Std. Error t value Pr(>|t|)    
-# (Intercept)  0.0094795  0.0007116   13.32 1.11e-05 ***
-# eff_loy_bolt 0.2573508  0.0023604  109.03 4.01e-11 ***
-
-
-
-lm_fit <- lm(eff_lox_ivw ~ eff_loy_bolt, data=dat %>% filter(trait %in% c("mLOX and mLOY (same variant)", "mLOX and mLOY (r2>0.6)") ))
-summary(lm_fit)
-# old 
-#              Estimate Std. Error t value Pr(>|t|)    
-# (Intercept)  0.010364   0.002464   4.206  0.00181 ** 
-# eff_loy_bolt 0.249937   0.009865  25.335  2.1e-10 ***
-# new 
-#              Estimate Std. Error t value Pr(>|t|)    
-# (Intercept)  0.011833   0.002061   5.742 0.000187 ***
-# eff_loy_bolt 0.253801   0.008250  30.765 3.09e-11 ***
-
-
-dat %>% filter(trait=="mLOX and mLOY (same variant)") %>% 
-      select(eff_loy_bolt, eff_lox_ivw) %>% 
-      mutate(sl=eff_lox_ivw/eff_loy_bolt) %>% summary()  # old: Median :0.2758, Mean   :0.2941; new: Median :0.3056, Mean   :0.3110 
-
-
-dat %>% filter(trait %in% c("mLOX and mLOY (same variant)", "mLOX and mLOY (r2>0.6)") ) %>% 
-      select(eff_loy_bolt, eff_lox_ivw) %>% 
-      mutate(sl=eff_lox_ivw/eff_loy_bolt) %>% summary()  # old, Median :0.2842, Mean   :0.3753; new: Median :0.3385, Mean   :0.3880  
 freq_loy <- 41791/(205011)   # 0.2038476
 freq_lox <- 86093/(818431)   # 0.1051927
 
 
 taus=c(0.15, 0.15, 0.15)    # prior SD for the larger effect 
-# slopes=c(0, Inf, 0.35, -0.2)    # slopes for models
-# slopes=c(0, Inf, 0.35)    # slopes for models
-# slopes=c(0, Inf, 0.2941)    # slopes for models
 slopes=c(0, Inf, 0.30)    # slopes for models
-# slopes=c(0, Inf, 1)    # slopes for models
 rhos=c(0.995, 0.995, 0.995) # rhos for models
 model.names=c("mLOY", "mLOX", "Same")
 K=length(taus)   #number of models
@@ -167,8 +137,7 @@ dat_output <- dat_output %>%
              p_diff_2sidettest=2*pnorm(abs(beta_diff/sqrt(var_diff)),lower.tail=F), 
              p_diff_2sidettest=ifelse(round(p_diff_2sidettest,2)<0.01, formatC(p_diff_2sidettest, format="e", digits=2), round(p_diff_2sidettest,2))) %>% 
       select(-beta_diff, -var_diff)
-# write.table(dat_output, "FormattedTables/TableS12_mLOX_mLOY_AssignGroups.BayesLineModel.LDQCed.slope030.tsv", append=F, quote=F, sep="\t", row.names=F, col.names=T)
-write.table(dat_output, "FormattedTables/TableS12_mLOX_mLOY_AssignGroups.BayesLineModel.LDQCed.slope1.tsv", append=F, quote=F, sep="\t", row.names=F, col.names=T)
+write.table(dat_output, "FormattedTables/TableS12_mLOX_mLOY_AssignGroups.BayesLineModel.LDQCed.slope030.tsv", append=F, quote=F, sep="\t", row.names=F, col.names=T)
 
 
 
